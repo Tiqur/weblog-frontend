@@ -10,19 +10,34 @@ const AddTradeButton = () => {
   )
 }
 
+function generateFakeTrade() {
+  return ({
+    time_entry: Date.now(),
+    time_exit: Date.now(),
+    position_type: Math.floor(Math.random()) ? "LONG" : "SHORT",
+    entry_price: Math.random(),
+    exit_price: Math.random()
+  })
+}
+
 
 function HomePage() {
+  const trades = [];
+  for (let i=0; i<20; i++) {
+    trades.push(generateFakeTrade())
+  }
+
   return (
     <div classname={styles.container}>
       <div className={styles.trades_container}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25].map(e => (
+        {trades.map(e => (
           <div className={styles.trade_log}>
-            <p>07/31/22 1:25:00</p>
-            <p>07/31/22 1:32:00</p>
-            <p>LONG</p>
-            <p>$23,7242.10</p>
-            <p>$23,707.20</p>
-            <p>+0.15%</p>
+            <p>{e.time_entry}</p>
+            <p>{e.time_exit}</p>
+            <p>{e.position_type}</p>
+            <p>${e.entry_price}</p>
+            <p>${e.exit_price}</p>
+            <p>%{e.entry_price / e.entry_price}</p>
           </div>
         ))}
       </div>
