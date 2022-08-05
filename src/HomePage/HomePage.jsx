@@ -16,9 +16,9 @@ function generateFakeTrade() {
   return ({
     time_entry: Date.now(),
     time_exit: Date.now(),
-    position_type: Math.floor(Math.random()) ? "LONG" : "SHORT",
-    entry_price: Math.random(),
-    exit_price: Math.random()
+    position_type: Math.round(Math.random()) ? "LONG" : "SHORT",
+    entry_price: Math.random().toFixed(5),
+    exit_price: Math.random().toFixed(5)
   })
 }
 
@@ -46,24 +46,34 @@ function HomePage() {
         <div className={styles.stats_container}>
           
         </div>
+        <table className={styles.trade_log_container}>
+          <tr className={styles.trade_log_label}>
+            <td>Time Enter</td>
+            <td>Time Exit</td>
+            <td>Position</td>
+            <td>Price Enter</td>
+            <td>Price Exit</td>
+            <td>P/L</td>
+          </tr>
+        </table>
         <InfiniteScroll 
           className={styles.infinite_scroll_container}
           dataLength={trades.length}
           next={fetchMoreData}
           hasMore={true}
           height={400}>
-          <div className={styles.trade_log_container}>
-          {trades.map((e, index) => (
-              <div key={index} className={styles.trade_log}>
-                <p>{e.time_entry}</p>
-                <p>{e.time_exit}</p>
-                <p>{e.position_type}</p>
-                <p>${e.entry_price}</p>
-                <p>${e.exit_price}</p>
-                <p>%{e.entry_price / e.entry_price}</p>
-              </div>
-          ))}
-          </div>
+          <table className={styles.trade_log_container}>
+            {trades.map((e, index) => (
+                <tr key={index} className={styles.trade_log}>
+                  <td>{e.time_entry}</td>
+                  <td>{e.time_exit}</td>
+                  <td style={{color: e.position_type == 'LONG' ? '#62C951' : '#D15D5D'}}>{e.position_type}</td>
+                  <td>${e.entry_price}</td>
+                  <td>${e.exit_price}</td>
+                  <td>%{e.entry_price / e.entry_price}</td>
+                </tr>
+            ))}
+          </table>
         </InfiniteScroll>
       <AddTradeButton/>
     </div>
