@@ -5,20 +5,24 @@
   align-items: center;
 }
 
-.trades_container {
-  margin-top: 6em;
-  width: 90%;
+.infinite_scroll_container {
+  margin-top: 2em;
+  width: calc(100vw - 10em);
+  max-width: 2500px;
+  background: #202025;
+  border-radius: 0.5em;
+}
+
+.trade_log_container {
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #202025;
-  margin: 4em;
-  overflow-y: scroll;
 }
 
 .trade_log {
-  width: 95%;
+  width: 90%;
   margin-top: 0.5em;
   height: 2em;
   background: #303036;
@@ -29,6 +33,14 @@
   color: white;
 }
 
+.stats_container {
+  margin-top: 2em;
+  height: 20em;
+  border-radius: 0.5em;
+  width: calc(100vw - 10em);
+  max-width: 2500px;
+  background: #202025;
+}
 
 .add_trade_button {
   width: 3em;

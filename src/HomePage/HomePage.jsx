@@ -34,31 +34,37 @@ function HomePage() {
   function fetchMoreData() {
     setTimeout(() => {
       const new_trades = [];
-      for (let i=0; i<50; i++)
+      for (let i=0; i<5; i++)
         new_trades.push(generateFakeTrade())
 
       setTrades([...trades, ...new_trades])
-    }, 1000);
+    }, 500);
   };
 
   return (
-    <div classname={styles.container}>
+    <div className={styles.container}>
+        <div className={styles.stats_container}>
+          
+        </div>
         <InfiniteScroll 
-          className={styles.trades_container}
+          className={styles.infinite_scroll_container}
           dataLength={trades.length}
           next={fetchMoreData}
           hasMore={true}
+          height={400}
           loader={<h4>Loading...</h4>}>
-          {trades.map(e => (
-            <div className={styles.trade_log}>
-              <p>{e.time_entry}</p>
-              <p>{e.time_exit}</p>
-              <p>{e.position_type}</p>
-              <p>${e.entry_price}</p>
-              <p>${e.exit_price}</p>
-              <p>%{e.entry_price / e.entry_price}</p>
-            </div>
+          <div className={styles.trade_log_container}>
+          {trades.map((e, index) => (
+              <div key={index} className={styles.trade_log}>
+                <p>{e.time_entry}</p>
+                <p>{e.time_exit}</p>
+                <p>{e.position_type}</p>
+                <p>${e.entry_price}</p>
+                <p>${e.exit_price}</p>
+                <p>%{e.entry_price / e.entry_price}</p>
+              </div>
           ))}
+          </div>
         </InfiniteScroll>
       <AddTradeButton/>
     </div>
