@@ -51,8 +51,7 @@ function HomePage() {
           dataLength={trades.length}
           next={fetchMoreData}
           hasMore={true}
-          height={400}
-          loader={<h4>Loading...</h4>}>
+          height={400}>
           <div className={styles.trade_log_container}>
           {trades.map((e, index) => (
               <div key={index} className={styles.trade_log}>
