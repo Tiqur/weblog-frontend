@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100vw - 10em);
+  height: 100vh;
+  //background: blue;
+  margin-left: 0 50em 0 50em;
+  max-width: 2500px;
+}

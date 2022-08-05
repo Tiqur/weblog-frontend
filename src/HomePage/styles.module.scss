@@ -7,7 +7,6 @@
 
 .infinite_scroll_container {
   width: calc(100vw - 10em);
-  max-width: 2500px;
   background: #202025;
   border-radius: 0.5em;
   table-layout: fixed;
@@ -28,14 +27,14 @@
 }
 
 .trade_log_label {
-  width: calc(100vw - 20em);
+  width: 90%;
   display: flex;
   align-items: center;
   color: white;
 }
 
 .trade_log {
-  width: calc(100vw - 20em);
+  width: 90%;
   margin-top: 0.5em;
   height: 2em;
   background: #303036;
@@ -56,8 +55,7 @@
   margin-top: 2em;
   height: 20em;
   border-radius: 0.5em;
-  width: calc(100vw - 10em);
-  max-width: 2500px;
+  width: 100%;
   background: #202025;
 }
 

@@ -1,5 +1,9 @@
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #17171C;
+  font-family: "Roboto";
   padding: 0;
   margin: 0;
 }
