@@ -12,6 +12,14 @@ const AddTradeButton = () => {
   )
 }
 
+function calculatePL(position_type, entry_price, exit_price) {
+  return (position_type == 'LONG' ? (exit_price-entry_price)/entry_price : (entry_price-exit_price)/exit_price);
+}
+
+function formatUnixToDate(unix) {
+ return(new Date(unix).toLocaleString());
+}
+
 function generateFakeTrade() {
   return ({
     time_entry: Date.now(),
@@ -65,12 +73,12 @@ function HomePage() {
           <table className={styles.trade_log_container}>
             {trades.map((e, index) => (
                 <tr key={index} className={styles.trade_log}>
-                  <td>{e.time_entry}</td>
-                  <td>{e.time_exit}</td>
+                  <td>{formatUnixToDate(e.time_entry)}</td>
+                  <td>{formatUnixToDate(e.time_exit)}</td>
                   <td style={{color: e.position_type == 'LONG' ? '#62C951' : '#D15D5D'}}>{e.position_type}</td>
                   <td>${e.entry_price}</td>
                   <td>${e.exit_price}</td>
-                  <td>%{e.entry_price / e.entry_price}</td>
+                  <td style={{color: calculatePL(e.position_type, e.entry_price, e.exit_price)>=0 ? '#62C951' : '#D15D5D'}}>%{calculatePL(e.position_type, e.entry_price, e.exit_price).toFixed(2)}</td>
                 </tr>
             ))}
           </table>
