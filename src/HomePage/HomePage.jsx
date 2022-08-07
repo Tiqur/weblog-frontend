@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 import InfiniteScroll from "react-infinite-scroll-component";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 const AddTradeButton = () => {
   return (
@@ -31,10 +31,22 @@ function generateFakeTrade() {
 }
 
 
+
 function HomePage() {
   const [trades, setTrades] = useState([])
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight)
+
+  // Update window height state on resize
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      setWindowHeight(window.innerHeight);
+    });
+  }, []);
 
 
+
+
+  // Gen fake trades
   for (let i=0; i<50; i++) {
     trades.push(generateFakeTrade())
   }
@@ -49,9 +61,13 @@ function HomePage() {
     }, 500);
   };
 
+
+
+
+
   return (
     <div className={styles.container}>
-        <div className={styles.stats_container}>
+        <div className={styles.stats_container} style={{height: window.innerHeight*0.7}}>
           
         </div>
         <table className={styles.trade_log_container}>
@@ -69,7 +85,7 @@ function HomePage() {
           dataLength={trades.length}
           next={fetchMoreData}
           hasMore={true}
-          height={400}>
+          height={window.innerHeight*0.2}>
           <table className={styles.trade_log_container}>
             {trades.map((e, index) => (
                 <tr key={index} className={styles.trade_log}>
