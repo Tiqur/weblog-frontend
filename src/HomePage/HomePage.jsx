@@ -28,7 +28,7 @@ function generateFakeTrade() {
     time_exit: Date.now(),
     position_type: Math.round(Math.random()) ? "LONG" : "SHORT",
     entry_price: Math.random().toFixed(5),
-    exit_price: Math.random().toFixed(5)
+    exit_price: (Math.random() * (Math.random() < 0.5) ? -1 : 1).toFixed(5)
   })
 }
 
@@ -103,6 +103,7 @@ function HomePage() {
 
   return (
     <div className={styles.container}>
+        <h1>WebLog</h1>
         <div className={styles.stats_container} style={{height: window.innerHeight*0.3}}>
           <div className={styles.pie_chart_container}>
             <Pie options={{ maintainAspectRatio: false }} data={data1}/>
