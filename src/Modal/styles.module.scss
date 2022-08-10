@@ -1,0 +1,26 @@
+.container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(23, 23, 28, 0.7);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // Content + Title Container
+  & > div {
+    background: #202025;
+    border-radius: 0.5em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 2em 6em 6em 6em;
+
+      // Title
+      & > h1 {
+        margin: 0 0 1em 0;
+        user-select: none;
+      }
+  }
+}

@@ -1,4 +1,5 @@
 import styles from './styles.module.scss';
+import Modal from '../Modal/Modal';
 import InfiniteScroll from "react-infinite-scroll-component";
 import {useState, useEffect} from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title } from 'chart.js';
@@ -34,11 +35,12 @@ function generateFakeTrade() {
 
 
 
-function HomePage() {
+export default () => {
   const [trades, setTrades] = useState([]);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [data1, setData1] = useState({datasets:[]});
   const [data2, setData2] = useState({datasets:[]});
+  const [showModal, setShowModal] = useState(true);
   ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
   // Update window height state on resize
@@ -101,9 +103,30 @@ function HomePage() {
   };
 
 
+  // Handle click outside modal
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (e.target.id === 'background') {
+        setShowModal(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, [])
+
+
   return (
     <div className={styles.container}>
         <h1>WebLog</h1>
+        { showModal && 
+          <Modal title='Create Log'>
+
+          </Modal>
+        }
         <div className={styles.stats_container} style={{height: window.innerHeight*0.3}}>
           <div className={styles.pie_chart_container}>
             <Pie options={{ maintainAspectRatio: false }} data={data1}/>
@@ -130,7 +153,7 @@ function HomePage() {
           height={window.innerHeight*0.6}>
           <table className={styles.trade_log_container}>
             {trades.map((e, index) => (
-                <tr key={index} className={styles.trade_log}>
+                <tr key={index} onClick={() => setShowModal(true)} className={styles.trade_log}>
                   <td>{formatUnixToDate(e.time_entry)}</td>
                   <td>{formatUnixToDate(e.time_exit)}</td>
                   <td style={{color: e.position_type == 'LONG' ? '#62C951' : '#D15D5D'}}>{e.position_type}</td>
@@ -145,5 +168,3 @@ function HomePage() {
     </div>
   );
 }
-
-export default HomePage;
