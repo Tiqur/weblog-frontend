@@ -40,7 +40,7 @@ export default () => {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [data1, setData1] = useState({datasets:[]});
   const [data2, setData2] = useState({datasets:[]});
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
   // Update window height state on resize
